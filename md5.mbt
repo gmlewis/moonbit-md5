@@ -25,6 +25,9 @@ struct Digest {
   x : FixedArray[Byte] // block_size
   mut nx : Int
   mut len : UInt64
+  // workaround to get rid of compiler warning:
+  // See: https://discord.com/channels/1135479745207869510/1272985768498958387/1275082247484997693
+  name : String
 }
 
 /// `Digest::new` returns a new, reset Digest, ready to sum.
@@ -34,13 +37,15 @@ pub fn Digest::new() -> Digest {
     x: FixedArray::make(block_size, b'\x00'),
     nx: 0,
     len: 0,
+    // workaround to get rid of compiler warning:
+    name: "md5",
   }
 }
 
 let _interface : HashFunc = Digest::new()
 
 pub fn name(self : Digest) -> String {
-  "md5"
+  self.name
 }
 
 /// `check_sum` returns the final md5sum as a hex string.

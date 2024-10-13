@@ -57,7 +57,7 @@ pub fn check_sum(self : Digest) -> String {
   // 1 byte end marker :: 0-63 padding bytes :: 8 byte length
   let tmp = FixedArray::make(1 + 63 + 8, b'\x00')
   tmp[0] = b'\x80'
-  let pad = ((55UL - self.len) % block_size.to_int64().to_uint64()).to_int() // calculate number of padding bytes
+  let pad = ((55UL - self.len) % block_size.to_int64().reinterpret_as_uint64()).to_int() // calculate number of padding bytes
   le_put_uint64(tmp, 1 + pad, self.len << 3) // append length in bits
   for i = 0; i < 1 + pad + 8; i = i + 1 {
     self.write(tmp[i])
@@ -75,9 +75,9 @@ pub fn check_sum(self : Digest) -> String {
   le_put_uint32(digest, 4, self.s[1])
   le_put_uint32(digest, 8, self.s[2])
   le_put_uint32(digest, 12, self.s[3])
-  let result = Buffer::new(size_hint=2 * size)
+  let result = @buffer.new(size_hint=2 * size)
   for b in digest {
-    result.write_char(to_hex(b.to_int().lsr(4) & 0xf))
+    result.write_char(to_hex((b.to_int() >> 4) & 0xf))
     result.write_char(to_hex(b.to_int() & 0xf))
   }
   result.to_string()
@@ -213,25 +213,25 @@ fn block_generic(self : Digest) -> Unit {
 
 fn le_uint32(b : FixedArray[Byte], offset : Int) -> UInt {
   b[offset].to_uint() |
-  b[offset + 1].to_uint().lsl(8) |
-  b[offset + 2].to_uint().lsl(16) |
-  b[offset + 3].to_uint().lsl(24)
+  (b[offset + 1].to_uint() << 8) |
+  (b[offset + 2].to_uint() << 16) |
+  (b[offset + 3].to_uint() << 24)
 }
 
 fn le_put_uint32(b : FixedArray[Byte], offset : Int, value : UInt) -> Unit {
   b[offset] = (value & 0xff).to_byte()
-  b[offset + 1] = (value.lsr(8) & 0xff).to_byte()
-  b[offset + 2] = (value.lsr(16) & 0xff).to_byte()
-  b[offset + 3] = (value.lsr(24) & 0xff).to_byte()
+  b[offset + 1] = ((value >> 8) & 0xff).to_byte()
+  b[offset + 2] = ((value >> 16) & 0xff).to_byte()
+  b[offset + 3] = ((value >> 24) & 0xff).to_byte()
 }
 
 fn le_put_uint64(b : FixedArray[Byte], offset : Int, value : UInt64) -> Unit {
   le_put_uint32(b, offset, (value & 0xffffffff).to_uint())
-  le_put_uint32(b, offset + 4, (value.lsr(32) & 0xffffffff).to_uint())
+  le_put_uint32(b, offset + 4, ((value >> 32) & 0xffffffff).to_uint())
 }
 
 fn rotl(x : UInt, r : Int) -> UInt {
-  x.lsl(r) | x.lsr(32 - r)
+  (x << r) | (x >> (32 - r))
 }
 
 fn to_hex(v : Int) -> Char {

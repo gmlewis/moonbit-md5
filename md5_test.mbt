@@ -1,15 +1,15 @@
-/// This package is based on the Go implementation found here:
+///| This package is based on the Go implementation found here:
 /// https://cs.opensource.google/go/go/+/refs/tags/go1.23.0:src/crypto/md5/md5_test.go
 /// which has the copyright notice:
 /// Copyright 2009 The Go Authors. All rights reserved.
 /// Use of this source code is governed by a BSD-style
 /// license that can be found in the LICENSE file.
-
 struct MD5Test {
   out : String
   s : String
 }
 
+///|
 let golden : Array[MD5Test] = [
   { out: "d41d8cd98f00b204e9800998ecf8427e", s: "" },
   { out: "0cc175b9c0f1b6a831c399e269772661", s: "a" },

@@ -1,4 +1,4 @@
-/// This package is based on the Go implementation found here:
+///| This package is based on the Go implementation found here:
 /// https://cs.opensource.google/go/go/+/refs/tags/go1.23.0:src/crypto/md5/md5.go
 /// which has the copyright notice:
 /// Copyright 2009 The Go Authors. All rights reserved.
@@ -9,17 +9,22 @@
 let size = 16
 
 // The blocksize of MD5 in bytes.
+///|
 let block_size = 64
 
+///|
 let init0 = 0x67452301U
 
+///|
 let init1 = 0xEFCDAB89U
 
+///|
 let init2 = 0x98BADCFEU
 
+///|
 let init3 = 0x10325476U
 
-/// `Digest` represents the partial evaluation of a checksum.
+///| `Digest` represents the partial evaluation of a checksum.
 struct Digest {
   s : FixedArray[UInt] // 4
   x : FixedArray[Byte] // block_size
@@ -30,7 +35,7 @@ struct Digest {
   name : String
 }
 
-/// `Digest::new` returns a new, reset Digest, ready to sum.
+///| `Digest::new` returns a new, reset Digest, ready to sum.
 pub fn Digest::new() -> Digest {
   {
     s: FixedArray::from_array([init0, init1, init2, init3]),
@@ -42,13 +47,15 @@ pub fn Digest::new() -> Digest {
   }
 }
 
+///|
 let _interface : HashFunc = Digest::new()
 
+///|
 pub fn name(self : Digest) -> String {
   self.name
 }
 
-/// `check_sum` returns the final md5sum as a hex string.
+///| `check_sum` returns the final md5sum as a hex string.
 pub fn check_sum(self : Digest) -> String {
   // Append 0x80 to the end of the message and then append zeros
   // until the length is a multiple of 56 bytes. Finally append
@@ -83,7 +90,7 @@ pub fn check_sum(self : Digest) -> String {
   result.to_unchecked_string()
 }
 
-/// `reset` resets a digest for re-use.
+///| `reset` resets a digest for re-use.
 pub fn reset(self : Digest) -> Unit {
   self.s[0] = init0
   self.s[1] = init1
@@ -93,7 +100,7 @@ pub fn reset(self : Digest) -> Unit {
   self.len = 0
 }
 
-/// `write` writes a byte to the digest.
+///| `write` writes a byte to the digest.
 pub fn write(self : Digest, b : Byte) -> Unit {
   self.len += 1
   self.x[self.nx] = b
@@ -104,6 +111,7 @@ pub fn write(self : Digest, b : Byte) -> Unit {
   }
 }
 
+///|
 fn block_generic(self : Digest) -> Unit {
   // load state
   let mut a = self.s[0]
@@ -211,6 +219,7 @@ fn block_generic(self : Digest) -> Unit {
   self.s[3] += d
 }
 
+///|
 fn le_uint32(b : FixedArray[Byte], offset : Int) -> UInt {
   b[offset].to_uint() |
   (b[offset + 1].to_uint() << 8) |
@@ -218,6 +227,7 @@ fn le_uint32(b : FixedArray[Byte], offset : Int) -> UInt {
   (b[offset + 3].to_uint() << 24)
 }
 
+///|
 fn le_put_uint32(b : FixedArray[Byte], offset : Int, value : UInt) -> Unit {
   b[offset] = (value & 0xff).to_byte()
   b[offset + 1] = ((value >> 8) & 0xff).to_byte()
@@ -225,15 +235,18 @@ fn le_put_uint32(b : FixedArray[Byte], offset : Int, value : UInt) -> Unit {
   b[offset + 3] = ((value >> 24) & 0xff).to_byte()
 }
 
+///|
 fn le_put_uint64(b : FixedArray[Byte], offset : Int, value : UInt64) -> Unit {
   le_put_uint32(b, offset, (value & 0xffffffff).to_uint())
   le_put_uint32(b, offset + 4, ((value >> 32) & 0xffffffff).to_uint())
 }
 
+///|
 fn rotl(x : UInt, r : Int) -> UInt {
   (x << r) | (x >> (32 - r))
 }
 
+///|
 fn to_hex(v : Int) -> Char {
   if v < 10 {
     Char::from_int(v + b'0'.to_int())

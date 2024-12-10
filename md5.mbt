@@ -87,7 +87,7 @@ pub fn check_sum(self : Digest) -> String {
     result.write_char(to_hex((b.to_int() >> 4) & 0xf))
     result.write_char(to_hex(b.to_int() & 0xf))
   }
-  result.to_unchecked_string()
+  result.contents().to_unchecked_string()
 }
 
 ///| `reset` resets a digest for re-use.

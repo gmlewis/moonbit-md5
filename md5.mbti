@@ -1,0 +1,23 @@
+package gmlewis/md5
+
+// Values
+
+// Types and methods
+type Digest
+impl Digest {
+  check_sum(Self) -> String
+  name(Self) -> String
+  new() -> Self
+  reset(Self) -> Unit
+  write(Self, Byte) -> Unit
+}
+
+// Type aliases
+
+// Traits
+pub(open) trait HashFunc {
+  name(Self) -> String
+  write(Self, Byte) -> Unit
+  check_sum(Self) -> String
+}
+

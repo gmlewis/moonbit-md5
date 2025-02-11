@@ -255,6 +255,7 @@ fn to_hex(v : Int) -> Char {
   }
 }
 
+///|
 test "le_uint32 works" {
   let tests = [
     (FixedArray::from_array([b'\x00', b'\x00', b'\x00', b'\x00']), 0U),

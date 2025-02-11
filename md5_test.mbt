@@ -98,6 +98,7 @@ let golden : Array[MD5Test] = [
   },
 ]
 
+///|
 test "check_sum works properly" {
   for tt in golden {
     let digest = @md5.Digest::new()

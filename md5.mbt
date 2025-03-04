@@ -51,12 +51,12 @@ pub fn Digest::new() -> Digest {
 let _interface : &HashFunc = Digest::new()
 
 ///|
-pub fn name(self : Digest) -> String {
+pub impl HashFunc for Digest with name(self) {
   self.name
 }
 
 ///| `check_sum` returns the final md5sum as a hex string.
-pub fn check_sum(self : Digest) -> String {
+pub impl HashFunc for Digest with check_sum(self) {
   // Append 0x80 to the end of the message and then append zeros
   // until the length is a multiple of 56 bytes. Finally append
   // 8 bytes representing the message length in bits.
@@ -101,7 +101,7 @@ pub fn reset(self : Digest) -> Unit {
 }
 
 ///| `write` writes a byte to the digest.
-pub fn write(self : Digest, b : Byte) -> Unit {
+pub impl HashFunc for Digest with write(self, b) {
   self.len += 1
   self.x[self.nx] = b
   self.nx += 1

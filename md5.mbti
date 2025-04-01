@@ -1,4 +1,4 @@
-package gmlewis/md5
+package "gmlewis/md5"
 
 // Values
 fn reset(Digest) -> Unit

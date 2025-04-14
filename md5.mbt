@@ -1,4 +1,5 @@
-///| This package is based on the Go implementation found here:
+///|
+/// This package is based on the Go implementation found here:
 /// https://cs.opensource.google/go/go/+/refs/tags/go1.23.0:src/crypto/md5/md5.go
 /// which has the copyright notice:
 /// Copyright 2009 The Go Authors. All rights reserved.
@@ -24,7 +25,8 @@ let init2 = 0x98BADCFEU
 ///|
 let init3 = 0x10325476U
 
-///| `Digest` represents the partial evaluation of a checksum.
+///|
+/// `Digest` represents the partial evaluation of a checksum.
 struct Digest {
   s : FixedArray[UInt] // 4
   x : FixedArray[Byte] // block_size
@@ -35,7 +37,8 @@ struct Digest {
   name : String
 }
 
-///| `Digest::new` returns a new, reset Digest, ready to sum.
+///|
+/// `Digest::new` returns a new, reset Digest, ready to sum.
 pub fn Digest::new() -> Digest {
   {
     s: FixedArray::from_array([init0, init1, init2, init3]),
@@ -55,7 +58,8 @@ pub impl HashFunc for Digest with name(self) {
   self.name
 }
 
-///| `check_sum` returns the final md5sum as a hex string.
+///|
+/// `check_sum` returns the final md5sum as a hex string.
 pub impl HashFunc for Digest with check_sum(self) {
   // Append 0x80 to the end of the message and then append zeros
   // until the length is a multiple of 56 bytes. Finally append
@@ -90,7 +94,8 @@ pub impl HashFunc for Digest with check_sum(self) {
   result.contents().to_unchecked_string()
 }
 
-///| `reset` resets a digest for re-use.
+///|
+/// `reset` resets a digest for re-use.
 pub fn reset(self : Digest) -> Unit {
   self.s[0] = init0
   self.s[1] = init1
@@ -100,7 +105,8 @@ pub fn reset(self : Digest) -> Unit {
   self.len = 0
 }
 
-///| `write` writes a byte to the digest.
+///|
+/// `write` writes a byte to the digest.
 pub impl HashFunc for Digest with write(self, b) {
   self.len += 1
   self.x[self.nx] = b

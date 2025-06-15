@@ -272,6 +272,6 @@ test "le_uint32 works" {
   ]
   for tt in tests {
     let got = le_uint32(tt.0, 0)
-    assert_eq!(got, tt.1)
+    assert_eq(got, tt.1)
   }
 }

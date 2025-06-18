@@ -9,8 +9,8 @@
 // The size of an MD5 checksum in bytes.
 let size = 16
 
-// The blocksize of MD5 in bytes.
 ///|
+// The blocksize of MD5 in bytes.
 let block_size = 64
 
 ///|

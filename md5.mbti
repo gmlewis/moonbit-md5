@@ -1,7 +1,6 @@
 package "gmlewis/md5"
 
 // Values
-fn reset(Digest) -> Unit
 
 // Types and methods
 type Digest

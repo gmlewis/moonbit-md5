@@ -3,6 +3,8 @@ package "gmlewis/md5"
 
 // Values
 
+// Errors
+
 // Types and methods
 type Digest
 fn Digest::new() -> Self

@@ -1,6 +1,6 @@
 {
   "name": "gmlewis/md5",
-  "version": "0.19.14",
+  "version": "0.19.16",
   "deps": {
     "gmlewis/base64": "0.14.12"
   },

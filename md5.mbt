@@ -96,7 +96,7 @@ pub impl HashFunc for Digest with check_sum(self) {
 
 ///|
 /// `reset` resets a digest for re-use.
-pub fn reset(self : Digest) -> Unit {
+pub fn Digest::reset(self : Digest) -> Unit {
   self.s[0] = init0
   self.s[1] = init1
   self.s[2] = init2
@@ -118,7 +118,7 @@ pub impl HashFunc for Digest with write(self, b) {
 }
 
 ///|
-fn block_generic(self : Digest) -> Unit {
+fn Digest::block_generic(self : Digest) -> Unit {
   // load state
   let mut a = self.s[0]
   let mut b = self.s[1]

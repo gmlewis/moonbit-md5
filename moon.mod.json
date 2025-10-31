@@ -1,8 +1,8 @@
 {
   "name": "gmlewis/md5",
-  "version": "0.19.19",
+  "version": "0.19.20",
   "deps": {
-    "gmlewis/base64": "0.15.1"
+    "gmlewis/base64": "0.15.2"
   },
   "readme": "README.md",
   "repository": "https://github.com/gmlewis/moonbit-md5",

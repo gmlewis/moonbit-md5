@@ -7,9 +7,9 @@ package "gmlewis/md5"
 
 // Types and methods
 type Digest
-fn Digest::new() -> Self
-fn Digest::reset(Self) -> Unit
-impl HashFunc for Digest
+pub fn Digest::new() -> Self
+pub fn Digest::reset(Self) -> Unit
+pub impl HashFunc for Digest
 
 // Type aliases
 

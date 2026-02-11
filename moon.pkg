@@ -3,6 +3,6 @@ import {
   "moonbitlang/core/builtin",
 }
 
-import "test" {
+import {
   "gmlewis/base64",
-}
+} for "test"

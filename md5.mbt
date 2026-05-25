@@ -54,13 +54,13 @@ pub fn Digest::new() -> Digest {
 let _trait : &HashFunc = Digest::new()
 
 ///|
-pub impl HashFunc for Digest with name(self) {
+pub impl HashFunc for Digest with fn name(self) {
   self.name
 }
 
 ///|
 /// `check_sum` returns the final md5sum as a hex string.
-pub impl HashFunc for Digest with check_sum(self) {
+pub impl HashFunc for Digest with fn check_sum(self) {
   // Append 0x80 to the end of the message and then append zeros
   // until the length is a multiple of 56 bytes. Finally append
   // 8 bytes representing the message length in bits.
@@ -86,10 +86,10 @@ pub impl HashFunc for Digest with check_sum(self) {
   le_put_uint32(digest, 4, self.s[1])
   le_put_uint32(digest, 8, self.s[2])
   le_put_uint32(digest, 12, self.s[3])
-  let result = @buffer.new(size_hint=2 * size)
+  let result = Buffer(size_hint=2 * size)
   for b in digest {
-    result.write_char(to_hex((b.to_int() >> 4) & 0xf))
-    result.write_char(to_hex(b.to_int() & 0xf))
+    result.write_char_utf16le(to_hex((b.to_int() >> 4) & 0xf))
+    result.write_char_utf16le(to_hex(b.to_int() & 0xf))
   }
   result.contents().to_unchecked_string()
 }
@@ -107,7 +107,7 @@ pub fn Digest::reset(self : Digest) -> Unit {
 
 ///|
 /// `write` writes a byte to the digest.
-pub impl HashFunc for Digest with write(self, b) {
+pub impl HashFunc for Digest with fn write(self, b) {
   self.len += 1
   self.x[self.nx] = b
   self.nx += 1

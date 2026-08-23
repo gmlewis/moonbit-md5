@@ -71,7 +71,7 @@ pub impl HashFunc for Digest with fn check_sum(self) {
   let pad = ((55UL - self.len) % block_size.to_int64().reinterpret_as_uint64()).to_int() // calculate number of padding bytes
   le_put_uint64(tmp, 1 + pad, self.len << 3) // append length in bits
   for i = 0; i < 1 + pad + 8; i = i + 1 {
-    self.write(tmp[i])
+    HashFunc::write(self, tmp[i])
   }
 
   // The previous write ensures that a whole number of

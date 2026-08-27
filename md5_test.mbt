@@ -12,17 +12,17 @@ struct MD5Test {
 
 ///|
 let golden : Array[MD5Test] = [
-  { out: "d41d8cd98f00b204e9800998ecf8427e", s: "" },
-  { out: "0cc175b9c0f1b6a831c399e269772661", s: "a" },
-  { out: "187ef4436122d1cc2f40dc2b92f0eba0", s: "ab" },
-  { out: "900150983cd24fb0d6963f7d28e17f72", s: "abc" },
-  { out: "e2fc714c4727ee9395f324cd2e7f331f", s: "abcd" },
-  { out: "ab56b4d92b40713acc5af89985d4b786", s: "abcde" },
-  { out: "e80b5017098950fc58aad83c8c14978e", s: "abcdef" },
-  { out: "7ac66c0f148de9519b8bd264312c4d64", s: "abcdefg" },
-  { out: "e8dc4081b13434b45189a720b77b6818", s: "abcdefgh" },
-  { out: "8aa99b1f439ff71293e95357bac6fd94", s: "abcdefghi" },
-  { out: "a925576942e94b2ef57a066101b48876", s: "abcdefghij" },
+  { out: "d41d8cd98f00b204e9800998ecf8427e", s: "", },
+  { out: "0cc175b9c0f1b6a831c399e269772661", s: "a", },
+  { out: "187ef4436122d1cc2f40dc2b92f0eba0", s: "ab", },
+  { out: "900150983cd24fb0d6963f7d28e17f72", s: "abc", },
+  { out: "e2fc714c4727ee9395f324cd2e7f331f", s: "abcd", },
+  { out: "ab56b4d92b40713acc5af89985d4b786", s: "abcde", },
+  { out: "e80b5017098950fc58aad83c8c14978e", s: "abcdef", },
+  { out: "7ac66c0f148de9519b8bd264312c4d64", s: "abcdefg", },
+  { out: "e8dc4081b13434b45189a720b77b6818", s: "abcdefgh", },
+  { out: "8aa99b1f439ff71293e95357bac6fd94", s: "abcdefghi", },
+  { out: "a925576942e94b2ef57a066101b48876", s: "abcdefghij", },
   {
     out: "d747fc1719c7eacb84058196cfe56d57",
     s: "Discard medicine more than two years old.",
@@ -43,7 +43,7 @@ let golden : Array[MD5Test] = [
     out: "a0f04459b031f916a59a35cc482dc039",
     s: "The days of the digital watch are numbered.  -Tom Stoppard",
   },
-  { out: "e7a48e0fe884faf31475d2a04b1362cc", s: "Nepal premier won't resign." },
+  { out: "e7a48e0fe884faf31475d2a04b1362cc", s: "Nepal premier won't resign.", },
   {
     out: "637d2fe925c07c113800509964fb0e06",
     s: "For every action there is an equal and opposite government program.",
@@ -60,7 +60,7 @@ let golden : Array[MD5Test] = [
     out: "acf203f997e2cf74ea3aff86985aefaf",
     s: "It's a tiny change to the code and not completely disgusting. - Bob Manchek",
   },
-  { out: "e1c1384cb4d2221dfdd7c795a4222c9a", s: "size:  a.out:  bad magic" },
+  { out: "e1c1384cb4d2221dfdd7c795a4222c9a", s: "size:  a.out:  bad magic", },
   {
     out: "c90f3ddecc54f34228c063d7525bf644",
     s: "The major problem is with sendmail.  -Mark Horton",

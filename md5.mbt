@@ -51,7 +51,7 @@ pub fn Digest::new() -> Digest {
 }
 
 ///|
-let _trait : &HashFunc = Digest::new()
+pub extend Digest with HashFunc::{name, reset, size, write, check_sum}
 
 ///|
 pub impl HashFunc for Digest with fn name(self) {
@@ -96,13 +96,19 @@ pub impl HashFunc for Digest with fn check_sum(self) {
 
 ///|
 /// `reset` resets a digest for re-use.
-pub fn Digest::reset(self : Digest) -> Unit {
+pub impl HashFunc for Digest with fn reset(self) {
   self.s[0] = init0
   self.s[1] = init1
   self.s[2] = init2
   self.s[3] = init3
   self.nx = 0
   self.len = 0
+}
+
+///|
+/// `size` is the md5 digest size in bytes.
+pub impl HashFunc for Digest with fn size(_self) {
+  size
 }
 
 ///|

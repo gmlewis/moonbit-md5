@@ -28,9 +28,9 @@ let init3 = 0x10325476U
 ///|
 /// `Digest` represents the partial evaluation of a checksum.
 struct Digest {
-  s : FixedArray[UInt] // 4
+  s : FixedArray[UInt32] // 4
   x : FixedArray[Byte] // block_size
-  mut nx : Int
+  mut nx : Int32
   mut len : UInt64
   // workaround to get rid of compiler warning:
   // See: https://discord.com/channels/1135479745207869510/1272985768498958387/1275082247484997693
@@ -232,7 +232,7 @@ fn Digest::block_generic(self : Digest) -> Unit {
 }
 
 ///|
-fn le_uint32(b : FixedArray[Byte], offset : Int) -> UInt {
+fn le_uint32(b : FixedArray[Byte], offset : Int32) -> UInt32 {
   b[offset].to_uint() |
   (b[offset + 1].to_uint() << 8) |
   (b[offset + 2].to_uint() << 16) |
@@ -240,7 +240,7 @@ fn le_uint32(b : FixedArray[Byte], offset : Int) -> UInt {
 }
 
 ///|
-fn le_put_uint32(b : FixedArray[Byte], offset : Int, value : UInt) -> Unit {
+fn le_put_uint32(b : FixedArray[Byte], offset : Int32, value : UInt32) -> Unit {
   b[offset] = (value & 0xff).to_byte()
   b[offset + 1] = ((value >> 8) & 0xff).to_byte()
   b[offset + 2] = ((value >> 16) & 0xff).to_byte()
@@ -248,22 +248,22 @@ fn le_put_uint32(b : FixedArray[Byte], offset : Int, value : UInt) -> Unit {
 }
 
 ///|
-fn le_put_uint64(b : FixedArray[Byte], offset : Int, value : UInt64) -> Unit {
+fn le_put_uint64(b : FixedArray[Byte], offset : Int32, value : UInt64) -> Unit {
   le_put_uint32(b, offset, (value & 0xffffffff).to_uint())
   le_put_uint32(b, offset + 4, ((value >> 32) & 0xffffffff).to_uint())
 }
 
 ///|
-fn rotl(x : UInt, r : Int) -> UInt {
+fn rotl(x : UInt32, r : Int32) -> UInt32 {
   (x << r) | (x >> (32 - r))
 }
 
 ///|
-fn to_hex(v : Int) -> Char {
+fn to_hex(v : Int32) -> Char {
   if v < 10 {
-    Int::unsafe_to_char(v + b'0'.to_int())
+    Int32::unsafe_to_char(v + b'0'.to_int())
   } else {
-    Int::unsafe_to_char(v - 10 + b'a'.to_int())
+    Int32::unsafe_to_char(v - 10 + b'a'.to_int())
   }
 }
 

@@ -86,7 +86,7 @@ pub impl HashFunc for Digest with fn check_sum(self) {
   le_put_uint32(digest, 4, self.s[1])
   le_put_uint32(digest, 8, self.s[2])
   le_put_uint32(digest, 12, self.s[3])
-  let result = Buffer(size_hint=2 * size)
+  let result = Buffer(capacity=2 * size)
   for b in digest {
     result.write_char_utf16le(to_hex((b.to_int() >> 4) & 0xf))
     result.write_char_utf16le(to_hex(b.to_int() & 0xf))
